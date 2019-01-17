@@ -1,6 +1,8 @@
 require_relative 'card'
 
 class Hand
+  MAX_POINTS = 21
+
   def cards
     @cards ||= []
   end
@@ -18,7 +20,7 @@ class Hand
     cards.each { |card| sum += card.value }
 
     cards.each do |card|
-      break if sum + card.extra > 21
+      break if sum + card.extra > MAX_POINTS
 
       sum += card.extra
     end

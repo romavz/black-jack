@@ -19,6 +19,11 @@ class MainView
     menu.activate
   end
 
+  def show_message(text)
+    puts text
+    puts
+  end
+
   def read_user_choice
     gets.chomp!
   end

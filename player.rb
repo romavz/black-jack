@@ -22,7 +22,7 @@ class Player
   end
 
   def overage?
-    @hand.sum_cards > 21
+    @hand.sum_cards > Hand::MAX_POINTS
   end
 
   def cards

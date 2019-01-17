@@ -37,7 +37,7 @@ class Application
       begin
         @menu[item_id].activate
       rescue StandardError => ex
-        puts ex.message.to_s
+        @main_view.show_message(ex.message.to_s)
       end
       @main_view.show_menu
     end
