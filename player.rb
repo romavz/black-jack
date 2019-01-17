@@ -1,54 +1,46 @@
 require_relative 'card'
+require_relative 'hand'
 
 class Player
-  NOT_ENOUGH_MONEY = "Недостаточно денег для продолжения игры"
-  
+  NOT_ENOUGH_MONEY = "Недостаточно денег для продолжения игры".freeze
+
   attr_accessor :name
   attr_reader :money
-  
-  def initialize (name, money = 100)
+
+  def initialize(name, money = 100)
     @name = name
     @money = money
+    @hand = Hand.new
   end
-  
+
   def new_round
-    @cards = []
+    @hand.clear
   end
-  
+
+  def take_cards(cards)
+    cards.each { |card| @hand.add_card(card) }
+  end
+
+  def overage?
+    @hand.sum_cards > 21
+  end
+
   def cards
-    @cards ||= []
+    @hand.cards
   end
-  
-  def show_cards
-    cards
-  end
-  
-  def show_sum_cards
-    sum_cards
-  end
-  
+
   def sum_cards
-    sum = 0
-    cards.each do |card|
-      sum += card.value
-    end
-    
-    cards.each do |card|
-      break if sum + card.extra > 21
-      sum += card.extra
-    end
-    
-    sum
+    @hand.sum_cards
   end
-  
+
   def add_money(value)
     @money += value
   end
-  
+
   def bet(value = 10)
-    raise NOT_ENOUGH_MONEY if money - value < 0 
+    raise NOT_ENOUGH_MONEY if money - value < 0
+
     @money -= value
     value
   end
-  
 end

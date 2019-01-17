@@ -2,35 +2,24 @@ require_relative 'player'
 require_relative 'dealer'
 require_relative 'card'
 require_relative 'deck'
+require_relative 'blackjack_game_state'
 
+class BlackJackGameOverState < BlackJackGameState
+  GAME_OVER_MESSAGE = "Игра закончена. Казино закрыто.".freeze
 
-class BlackJackGameOverState
-  attr_reader :user
-  attr_reader :dealer
-  attr_reader :bank
-  attr_reader :game
-  
-  
-  def initialize (game)
-    @game = game
-    @user = game.user
-    @dealer = game.dealer
-  end
-  
   def new_round
+    raise GAME_OVER_MESSAGE
+  end
 
-  end
-  
   def take_card
-    
+    raise GAME_OVER_MESSAGE
   end
-  
+
   def pass
-    
+    raise GAME_OVER_MESSAGE
   end
-  
+
   def open_cards
-    
+    raise GAME_OVER_MESSAGE
   end
-  
 end
